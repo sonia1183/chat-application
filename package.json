@@ -13,5 +13,11 @@
   },
   "scripts": {
     "start": "node server.js"
- }
+  },
+  "name": "ChatEngine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sonia1183/chat-application.git",
+  "author": "sonia rani <sonia1183.cse19@chitkara.edu.in>",
+  "license": "MIT"
 }

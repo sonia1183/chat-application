@@ -1,0 +1,59 @@
+<style>
+    body{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #container{
+        height: 70%;
+        display:flex;
+        align-items: center;
+    }
+    input{
+        width:300px;
+        height:50px;
+        font-size: larger;
+    }
+    #button-input{
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        margin-top: 20px;
+    }
+    /* table,tr,td{
+        border: 1px solid black;
+    } */
+    button{
+        background-color:red;
+        color: white;
+        outline: none;
+        border:0;
+        width:100px;
+        height:50px
+    }
+</style>
+<div id="container">
+    <form method="POST" id="login-form" action="/userCreate">
+        <table>
+            <tr id="name-input">
+                <td><label name="name">Enter your name-:</label></td>
+               <td><input type="text" name="name" placeholder="..ABC.." required/></td> 
+            </tr>
+            <tr id="email-input">
+                <td><label name="email">Enter your email-:</label></td>
+                <td><input type="email" name="email" placeholder="Email" required/></td> 
+            </tr>
+            <tr id="password-input">
+                <td><label name="password">Enter your password-:</label></td> 
+                <td><input type="password" name="password" placeholder="********" required/></td> 
+            </tr>
+            <tr id="password-input">
+                <td><label name="confirm_password">Confirm password-:</label></td> 
+                <td><input type="password" name="confirm_password" placeholder="********" required/></td> 
+            </tr>
+        </table>
+        <div id="button-input">
+        <button type="submit">SIGNUP</button>
+        </div>
+    </form>
+</div>

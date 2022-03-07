@@ -39,7 +39,7 @@ app.use(session({
     store : MongoStore.create({
         mongoUrl:'mongodb://localhost:27017/login',
         mongooseConnect: database,
-        autoRemove : 'disable' //session can't be removed automatically
+        autoRemove : 'enable' //session can't be removed automatically
      })
 }))
 
@@ -125,13 +125,13 @@ app.get('/chatRoom',passport.checkAuthentication,function(req,res){
 
 app.get('/logout',function(req,res){
      req.logOut(); 
-     return res.redirect('/');
+     return res.redirect('/signup');
 })
 
 
 
 
-server.listen(process.env.PORT || 4000,function(err){
+server.listen(PORT,function(err){
     if(err){
         console.log(err);
         return;   

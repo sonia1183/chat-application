@@ -1,5 +1,5 @@
 <link href="/css/chat_box.css" rel="stylesheet" type="text/css">
-<div id="logout"><button><a href="/">LOGOUT</a></button></div>
+<div id="logout"><button><a href="/logout">LOGOUT</a></button></div>
 <div id="user-chat-box">
     <div id="purple">
         <span>Let's Talk</span><br>
@@ -16,7 +16,7 @@
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"  ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        const socket = io('http://localhost:4000');
+        const socket = io('http://localhost:4000/chatRoom');
         socket.on('connection');
         socket.on('message',(data)=>{
             var list=$("#chat-messages-list")

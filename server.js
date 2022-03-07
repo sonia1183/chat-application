@@ -131,7 +131,7 @@ app.get('/logout',function(req,res){
 
 
 
-server.listen(PORT,function(err){
+server.listen(process.env.PORT||4000,function(err){
     if(err){
         console.log(err);
         return;   

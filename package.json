@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "name": "ChatEngine",
+  "name": "22chatapplication",
   "version": "1.0.0",
   "main": "server.js",
   "repository": "https://github.com/sonia1183/chat-application.git",

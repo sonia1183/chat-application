@@ -1,8 +1,10 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     body{
         display:flex;
         align-items: center;
         justify-content: center;
+        background-color: antiquewhite;
     }
     #container{
         height: 70%;
@@ -31,8 +33,27 @@
         width:100px;
         height:50px
     }
+    .back{
+        position: absolute;
+        top:5%;
+        left:2%;
+    }
+    .back a{
+        text-decoration: none;
+        color:blue;
+    }
+    .back a i{
+        font-size: 60px;
+    }
+    .author{
+        position:absolute;
+        bottom: 5%;
+        left:45%;
+        font-size: x-small;
+    }
 </style>
 <div id="container">
+    <div class="back"> <a href="/"><i class="fa fa-arrow-left"></i></a><br></div>
     <form method="POST" id="login-form" action="/userLogin">
         <table>
         <tr id="email-input">
@@ -48,6 +69,7 @@
         <button type="submit">LOGIN</button>
         </div>
     </form>
+    <em class="author">made by -: @sonia</em>
 </div>
 
 

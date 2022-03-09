@@ -41,7 +41,7 @@
         </tr>
         <tr id="password-input">
            <td><label name="password">Enter your password-:</label></td> 
-           <td><input type="password" name="password" placeholder="********"/></td> 
+           <td><input type="password" name="password" placeholder="********"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/></td> 
         </tr>
         </table>
         <div id="button-input">

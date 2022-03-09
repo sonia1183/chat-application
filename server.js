@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const passport= require('passport');
 const passportLocal = require('./config/passport-local');
+let alert = require('alert');
 
 
 const path = require('path');
@@ -54,28 +55,7 @@ app.get('/',function(req,res){
 app.get('/login',function(req,res){
     return res.render('login');
 })
-
-// app.post('/userLogin',function(req,res){
-//     ChatUser.findOne({email : req.body.email},function(err,user){
-//         if(err){
-//             console.log("error found");
-//             return;
-//         }
-//         if(user){
-//             if(user.password != req.body.password){
-//                 return res.redirect('back');
-//             }
-
-//             // res.cookie('name',user.name);
-//             let username=user.name;
-//             res.redirect('/chatRoom/'+username);
-//         }
-//         else{
-//             return res.redirect("back");
-//         }
-//     })
-// })       
-
+     
 app.post('/userLogin',
 passport.authenticate(
     'local',
@@ -94,7 +74,7 @@ app.get('/signup',function(req,res){
 
 app.post('/userCreate',function(req,res){
     if(req.body.password != req.body.confirm_password){
-        console.log("Password not matched");
+        alert("Password not matched");
         return res.redirect('back'); 
     }
     ChatUser.findOne({email : req.body.email},function(err,user){
@@ -125,18 +105,19 @@ app.get('/chatRoom',passport.checkAuthentication,function(req,res){
 
 app.get('/logout',function(req,res){
      req.logOut(); 
-     return res.redirect('/signup');
+     return res.redirect('/');
 })
 
 
 
 
 server.listen(process.env.PORT||4000,function(err){
+    var port = server.address().port;
     if(err){
         console.log(err);
         return;   
      }
-        console.log("Server is running on port",PORT)
+        console.log("Server is running on port",port)
 })
 
 io.on('connection',(socket)=>{
@@ -145,3 +126,26 @@ io.on('connection',(socket)=>{
         socket.broadcast.emit('message',data);
     })
 })
+
+
+
+// app.post('/userLogin',function(req,res){
+//     ChatUser.findOne({email : req.body.email},function(err,user){
+//         if(err){
+//             console.log("error found");
+//             return;
+//         }
+//         if(user){
+//             if(user.password != req.body.password){
+//                 return res.redirect('back');
+//             }
+
+//             // res.cookie('name',user.name);
+//             let username=user.name;
+//             res.redirect('/chatRoom/'+username);
+//         }
+//         else{
+//             return res.redirect("back");
+//         }
+//     })
+// })  

@@ -3,6 +3,7 @@
 <li>HOME PAGE</li>
 <li>SIGN UP PAGE</li>
 <li>LOG IN PAGE</li>
+<li>Chat Room</li>
 </ul>
 
 

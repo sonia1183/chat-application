@@ -1,5 +1,7 @@
-const PORT = 4000;
+//i select port at 4000 
 
+const PORT = 4000;
+//add module express, passport , passort-local ,express-session, mongoose , mongodb , connect-mongodb , socket.io
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
@@ -19,6 +21,10 @@ app.use(express.static('./assets'));
 app.set('views',path.join(__dirname,'views'));
 
 const database=require('./config/mongoose');
+
+//chatuser is data where save and which type data save 
+
+
 const ChatUser = require('./models/chatUser');
 const MongoStore = require('connect-mongo');
 
@@ -26,8 +32,9 @@ const server = require('http').createServer(app);
 const io= require('socket.io')(server,{cors:{origin:'*'}})
 
 app.use(express.urlencoded({extended:true}));
-app.use(cookieParser()); //middleware
 
+app.use(cookieParser()); //middleware
+//session
 app.use(session({
     name: 'login',
     secret:'xyz',
@@ -40,7 +47,7 @@ app.use(session({
     store : MongoStore.create({
         mongoUrl:'mongodb://localhost:27017/login',
         mongooseConnect: database,
-        autoRemove : 'enable' //session can't be removed automatically
+        autoRemove : 'enable'
      })
 }))
 
@@ -48,14 +55,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+
+
+//get for homepage
 app.get('/',function(req,res){
     return res.render('home');
 })
 
+
+
+
+//GET request login 
 app.get('/login',function(req,res){
     return res.render('login');
 })
-     
+ //POST request login    
 app.post('/userLogin',
 passport.authenticate(
     'local',
@@ -64,6 +78,10 @@ passport.authenticate(
     return res.redirect('/chatRoom')
 })
 
+
+
+
+//GET request to signup
 app.get('/signup',function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/chatRoom');
@@ -98,11 +116,16 @@ app.post('/userCreate',function(req,res){
     })
 })
 
+
+
+//GET requesto chat
 app.get('/chatRoom',passport.checkAuthentication,function(req,res){
     return res.render('chat_box');
 })
 
 
+
+//Logout session
 app.get('/logout',function(req,res){
      req.logOut(); 
      return res.redirect('/');

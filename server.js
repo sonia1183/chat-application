@@ -1,13 +1,10 @@
-//i select port at 4000 
-
 const PORT = 4000;
-//add module express, passport , passort-local ,express-session, mongoose , mongodb , connect-mongodb , socket.io
+//package require express cookie-parser passport passport-local ejs express-session socket.io 
 const express = require('express');
 const cookieParser = require('cookie-parser');
-
+const alert =require('alert')
 const passport= require('passport');
 const passportLocal = require('./config/passport-local');
-let alert = require('alert');
 
 
 const path = require('path');
@@ -20,11 +17,9 @@ app.set('view engine','ejs');
 app.use(express.static('./assets'));
 app.set('views',path.join(__dirname,'views'));
 
+
+//database use mongodb
 const database=require('./config/mongoose');
-
-//chatuser is data where save and which type data save 
-
-
 const ChatUser = require('./models/chatUser');
 const MongoStore = require('connect-mongo');
 
@@ -32,9 +27,8 @@ const server = require('http').createServer(app);
 const io= require('socket.io')(server,{cors:{origin:'*'}})
 
 app.use(express.urlencoded({extended:true}));
-
 app.use(cookieParser()); //middleware
-//session
+
 app.use(session({
     name: 'login',
     secret:'xyz',
@@ -47,7 +41,7 @@ app.use(session({
     store : MongoStore.create({
         mongoUrl:'mongodb://localhost:27017/login',
         mongooseConnect: database,
-        autoRemove : 'enable'
+        autoRemove : 'disable' //session can't be removed automatically
      })
 }))
 
@@ -56,20 +50,15 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-
-//get for homepage
+//GET request for home page
 app.get('/',function(req,res){
     return res.render('home');
 })
 
-
-
-
-//GET request login 
+//GET and POST request for login
 app.get('/login',function(req,res){
     return res.render('login');
 })
- //POST request login    
 app.post('/userLogin',
 passport.authenticate(
     'local',
@@ -79,9 +68,7 @@ passport.authenticate(
 })
 
 
-
-
-//GET request to signup
+//GET and POST request for signup
 app.get('/signup',function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/chatRoom');
@@ -117,132 +104,30 @@ app.post('/userCreate',function(req,res){
 })
 
 
-
-//GET requesto chat
+//GET request for chatRoom
 app.get('/chatRoom',passport.checkAuthentication,function(req,res){
     return res.render('chat_box');
 })
 
-
-
 //Logout session
 app.get('/logout',function(req,res){
      req.logOut(); 
-     return res.redirect('/');
+     return res.redirect('/signup');
 })
 
-
-
-
-server.listen(process.env.PORT||4000,function(err){
-    var port = server.address().port;
+//server
+server.listen(PORT,function(err){
     if(err){
         console.log(err);
         return;   
      }
-        console.log("Server is running on port",port)
+        console.log("Server is running on port",PORT)
 })
 
+//connection via socket to chatbox
 io.on('connection',(socket)=>{
     console.log('Token',socket.id);
     socket.on('message',(data)=>{
         socket.broadcast.emit('message',data);
     })
 })
-
-
-
-// app.post('/userLogin',function(req,res){
-//     ChatUser.findOne({email : req.body.email},function(err,user){
-//         if(err){
-//             console.log("error found");
-//             return;
-//         }
-//         if(user){
-//             if(user.password != req.body.password){
-//                 return res.redirect('back');
-//             }
-
-//             // res.cookie('name',user.name);
-//             let username=user.name;
-//             res.redirect('/chatRoom/'+username);
-//         }
-//         else{
-//             return res.redirect("back");
-//         }
-//     })
-// }) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//sonia

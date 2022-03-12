@@ -21,5 +21,6 @@ I install in this
 <li>npm i passport-local</li>
 </ol>
 
+<h2>To run -: node server.js</h2>
 
 <span style="font-size:3px;color:white">sonia</span>

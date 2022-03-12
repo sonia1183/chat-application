@@ -1,6 +1,7 @@
 body{
     margin:0;
     padding:0;
+    background-color: antiquewhite;
 }
 
 ::-webkit-scrollbar {
@@ -51,7 +52,7 @@ body{
 #user-chat-box #chat-messages-list .other-message span {
     display: inline-block;
     padding: 15px;
-    background-color: #ffa0a0;
+    background-color: #d6ffa0;
     max-width: 80%;
 }
 
@@ -64,7 +65,7 @@ body{
 #user-chat-box #chat-messages-list .self-message span {
     display: inline-block;
     padding: 15px;
-    background-color: #a0dcff;  
+    background-color: #ff9e9e;  
 }
 
 #user-chat-box #chat-message-input-container {
@@ -101,3 +102,41 @@ body{
     color:white;
     text-decoration: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* sonia */
